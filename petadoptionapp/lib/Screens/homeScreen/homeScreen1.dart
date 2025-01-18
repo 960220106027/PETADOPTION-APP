@@ -1,3 +1,4 @@
+import 'package:animate_do/animate_do.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:petadoptionapp/API/CategoryApi.dart';
@@ -51,7 +52,7 @@ class _HomeScreen1State extends State<HomeScreen1> {
           Padding(
             padding: const EdgeInsets.all(8.0),
             child: CircleAvatar(
-              backgroundImage: AssetImage("assets/female.png"),
+              backgroundImage: AssetImage("assets/birds.jpg"),
             ),
           )
         ],
@@ -194,71 +195,74 @@ class _HomeScreen1State extends State<HomeScreen1> {
               Text("All Pets",
                   style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold)),
               SizedBox(height: size.height * 0.02),
-              pet.loadingSpinner
-                  ? Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        const Text('Loading'),
-                        CircularProgressIndicator(
-                          color: Colors.black,
-                        ),
-                        const SizedBox(
-                          width: 10,
-                        ),
-                      ],
-                    )
-                  : pet.products.isEmpty
-                      ? Center(child: Text('No Pets...')):pet.searchproducts.isEmpty&&filtercontroller.text.isNotEmpty?Text('No Pets Availble'):
-                      pet.searchproducts.isNotEmpty&&filtercontroller.text.isNotEmpty?
-                      SizedBox(
-                          height: size.height * 0.9,
-                          child: GridView.builder(
-                            gridDelegate:
-                                SliverGridDelegateWithFixedCrossAxisCount(
-                                    crossAxisCount: 2,
-                                    childAspectRatio: 0.75,
-                                    mainAxisSpacing: 15,
-                                    crossAxisSpacing: 15),
-                            scrollDirection: Axis.vertical,
-                            itemCount: pet.searchproducts.length,
-                            itemBuilder: (context, intex) {
-                              return PetWidget(
-                                id: pet.searchproducts[intex].petid,
-                                name: pet.searchproducts[intex].name,
-                                photo: pet.searchproducts[intex].photo,
-                                age: pet.searchproducts[intex].age,
-                                sex: pet.searchproducts[intex].sex,
-                              );
-                            },
+              FadeInUp(
+                duration: Duration(milliseconds: 2500),
+                child: pet.loadingSpinner
+                    ? Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          const Text('Loading'),
+                          CircularProgressIndicator(
+                            color: Colors.black,
                           ),
-                        )
-
-
-
-                      : SizedBox(
-                          height: size.height * 0.9,
-                          child: GridView.builder(
-                            gridDelegate:
-                                SliverGridDelegateWithFixedCrossAxisCount(
-                                    crossAxisCount: 2,
-                                    childAspectRatio: 0.73,
-                                    mainAxisSpacing: 15,
-                                    crossAxisSpacing: 15),
-                            scrollDirection: Axis.vertical,
-                            itemCount: pet.products.length,
-                            itemBuilder: (context, intex) {
-                              return PetWidget(
-                                id: pet.products[intex].petid,
-                                name: pet.products[intex].name,
-                                photo: pet.products[intex].photo,
-                                 age: pet.products[intex].age,
-                                sex: pet.products[intex].sex,
-
-                             
-                              );
-                            },
+                          const SizedBox(
+                            width: 10,
                           ),
-                        ),
+                        ],
+                      )
+                    : pet.products.isEmpty
+                        ? Center(child: Text('No Pets...')):pet.searchproducts.isEmpty&&filtercontroller.text.isNotEmpty?Text('No Pets Availble'):
+                        pet.searchproducts.isNotEmpty&&filtercontroller.text.isNotEmpty?
+                        SizedBox(
+                            height: size.height * 0.9,
+                            child: GridView.builder(
+                              gridDelegate:
+                                  SliverGridDelegateWithFixedCrossAxisCount(
+                                      crossAxisCount: 2,
+                                      childAspectRatio: 0.75,
+                                      mainAxisSpacing: 15,
+                                      crossAxisSpacing: 15),
+                              scrollDirection: Axis.vertical,
+                              itemCount: pet.searchproducts.length,
+                              itemBuilder: (context, intex) {
+                                return PetWidget(
+                                  id: pet.searchproducts[intex].petid,
+                                  name: pet.searchproducts[intex].name,
+                                  photo: pet.searchproducts[intex].photo,
+                                  age: pet.searchproducts[intex].age,
+                                  sex: pet.searchproducts[intex].sex,
+                                );
+                              },
+                            ),
+                          )
+                
+                
+                
+                        : SizedBox(
+                            height: size.height * 0.9,
+                            child: GridView.builder(
+                              gridDelegate:
+                                  SliverGridDelegateWithFixedCrossAxisCount(
+                                      crossAxisCount: 2,
+                                      childAspectRatio: 0.73,
+                                      mainAxisSpacing: 15,
+                                      crossAxisSpacing: 15),
+                              scrollDirection: Axis.vertical,
+                              itemCount: pet.products.length,
+                              itemBuilder: (context, intex) {
+                                return PetWidget(
+                                  id: pet.products[intex].petid,
+                                  name: pet.products[intex].name,
+                                  photo: pet.products[intex].photo,
+                                   age: pet.products[intex].age,
+                                  sex: pet.products[intex].sex,
+                
+                               
+                                );
+                              },
+                            ),
+                          ),
+              ),
             ])),
       ),
     );
